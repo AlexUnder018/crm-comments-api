@@ -1,6 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
+import { TasksModule } from './tasks/tasks.module';
+import { CommentsModule } from './comments/comments.module';
 
 @Module({
   imports: [
@@ -18,6 +22,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         synchronize: true, // для тестового ок; в README можно указать, что в проде миграции
       }),
     }),
+    AuthModule,
+    UsersModule,
+    TasksModule,
+    CommentsModule,
   ],
 })
 export class AppModule {}
