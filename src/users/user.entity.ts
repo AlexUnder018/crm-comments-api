@@ -4,11 +4,10 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany,
 } from 'typeorm';
 import { UserRole } from './user-role.enum';
-import { Task } from '../tasks/task.entity';
-import { Comment } from '../comments/comment.entity';
+// import { Task } from '../tasks/task.entity';
+// import { Comment } from '../comments/comment.entity';
 
 @Entity('users')
 export class User {
@@ -21,11 +20,11 @@ export class User {
   @Column({ type: 'enum', enum: UserRole, default: UserRole.USER })
   role: UserRole;
 
-  @OneToMany(() => Task, (t) => t.user)
-  tasks: Task[];
+  //   @OneToMany(() => Task, (t) => t.user)
+  //   tasks: Task[];
 
-  @OneToMany(() => Comment, (c) => c.user)
-  comments: Comment[];
+  //   @OneToMany(() => Comment, (c) => c.user)
+  //   comments: Comment[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
