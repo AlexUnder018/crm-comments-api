@@ -16,9 +16,12 @@ import { RolesGuard } from '../auth/roles.guard';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { TasksService } from './tasks.service';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 type AuthenticatedRequest = Request & { user: { id: string } };
 
+@ApiTags('tasks')
+@ApiBearerAuth('access-token')
 @Controller('tasks')
 export class TasksController {
   constructor(private tasks: TasksService) {}
