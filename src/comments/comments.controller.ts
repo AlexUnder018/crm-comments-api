@@ -19,7 +19,11 @@ import { UpdateCommentDto } from './dto/update-comment.dto';
 import { CommentsService } from './comments.service';
 
 type AuthRequest = Request & { user: { id: string } };
+import { ApiQuery, ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiTags('comments')
+@ApiBearerAuth('access-token')
+@Controller('comments')
 @Controller('comments')
 export class CommentsController {
   constructor(private comments: CommentsService) {}
@@ -34,6 +38,12 @@ export class CommentsController {
 
   // GET /comments?task_id=xxx
   @UseGuards(AuthGuard('jwt'))
+  @ApiQuery({
+    name: 'task_id',
+    required: true,
+    example: 'b7d7c3d0-7f5a-4c7a-8a4a-1e2f3a4b5c6d',
+    description: 'UUID задачи',
+  })
   @Get()
   findByTask(@Query('task_id') taskId: string) {
     return this.comments.findByTask(taskId);
